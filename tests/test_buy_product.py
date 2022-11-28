@@ -25,7 +25,7 @@ def test_easy_purchase():
     cart = Cart_page(driver)
     cart.go_to_checkout()
 
-    # time.sleep(4)  # TODO Сделать с этим что-то!!!
+
     cp = Checkout_page(driver)
     cp.confirm_order()
 

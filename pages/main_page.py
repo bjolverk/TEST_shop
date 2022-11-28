@@ -23,10 +23,6 @@ class Main_page(Base):
 
     # GETTERS
 
-    # def get_user_name(self):
-    #     return WebDriverWait(self.driver, 30).until(
-    #         EC.element_to_be_clickable((By.XPATH, self.user_name)))
-
     def get_net_hardware(self):
         return WebDriverWait(self.driver, 30).until(
             EC.element_to_be_clickable((By.XPATH, self.net_hardware)))
