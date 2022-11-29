@@ -17,7 +17,11 @@ class Net_cards_page(Base):
     # LOCATORS
 
     page_title = '//div[@class="products-page__title"]/h1'
+    # =============PRODUCT 1==================================================================#
     select_net_card_1 = '//div[1]/div/div[2]/div[2]/div[2]/div/div[1]/div[1]/div[4]/button[2]'
+    selected_card_label = '/html/body/div[1]/div/div[2]/div[2]/div[2]/div/div[1]/div[1]/a/span'
+    selected_card_price = '/html/body/div[1]/div/div[2]/div[2]/div[2]/div/div[1]/div[1]/div[4]/div/div[1]'
+    # =============END OF PRODUCT1============================================================#
     product_title = '/html/body/div[1]/div/div[2]/div[2]/div[2]/div/div[1]/div[1]/a/span'
     to_shopping_cart_button = '//*[@id="app-cart-modal"]/div/div[2]/div[2]/button[2]'
     shopping_cart_button = '//a[@href="https://www.dns-shop.ru/cart/"]'
@@ -31,6 +35,14 @@ class Net_cards_page(Base):
     def get_select_net_card_1(self):
         return WebDriverWait(self.driver, 30).until(
             EC.element_to_be_clickable((By.XPATH, self.select_net_card_1)))
+
+    def get_selected_card_label(self):
+        return WebDriverWait(self.driver, 30).until(
+            EC.element_to_be_clickable((By.XPATH, self.selected_card_label)))
+
+    def get_selected_card_price(self):
+        return WebDriverWait(self.driver, 30).until(
+            EC.element_to_be_clickable((By.XPATH, self.selected_card_price)))
 
     def get_to_shopping_cart_button(self):
         return WebDriverWait(self.driver, 30).until(
@@ -51,6 +63,9 @@ class Net_cards_page(Base):
         self.get_select_net_card_1().click()
         print("Click select net card 1 ")
 
+    def clear_selected_card_price(self):
+        return self.get_selected_card_label().split()[0]
+
     def click_to_shopping_cart_button(self):
         self.get_to_shopping_cart_button().click()
         print("Click to shopping cart button ")
@@ -66,6 +81,8 @@ class Net_cards_page(Base):
         self.get_current_url()
         self.assert_word(self.get_page_title(), 'Сетевые карты')
         self.click_select_net_card_1()
+        assert self.get_selected_card_label().text == r'Сетевая карта DEXP ZH-FEPCI1 [1 x RJ-45, 100 Мбит/сек, PCI]'
+        print('Label is correct')
         try:
             self.click_to_shopping_cart_button()
 

@@ -48,10 +48,10 @@ class Main_page(Base):
 
     # METHODS
 
-    def сhosing_network_card(self):
+    def choosing_network_card(self):
         self.driver.get(self.url)
         self.driver.maximize_window()
         self.get_current_url()
         self.hover_net_hardware()
-        self.assert_word(self.get_cat_net_name(), 'Wi-Fi роутеры и оборудование для малых сетей')
+        self.assert_word(self.get_cat_net_name(), 'Wi-Fi роутеры и оборудование для малых сетей', 'Заголовок')
         self.click_net_cards()

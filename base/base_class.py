@@ -13,10 +13,13 @@ class Base:
 
     """METHOD ASSERT WORD"""
 
-    def assert_word(self, word, result):
+    def assert_word(self, word, result, value_type=''):
         value_word = word.text
         assert value_word == result
-        print("Good walue word")
+        if not value_type:
+            print("Good walue word")
+        else:
+            print(f'{value_type} is OK!')
 
     """METHOD SCREENSHOT"""
 
@@ -26,10 +29,8 @@ class Base:
         self.driver.save_screenshot(r'..\TEST_shop\screen\\' + name_screenshot)
 
     """METHOD ASSERT URL"""
+
     def assert_url(self, result):
         get_url = self.driver.current_url
         assert get_url == result
         print("Good walue url")
-
-
-
