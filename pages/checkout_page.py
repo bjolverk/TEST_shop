@@ -239,7 +239,7 @@ class Checkout_page(Base):
         self.click_delivery_button()
         try:
             self.assert_word(self.get_popup_heading(), 'Укажите детали доставки', 'Popup header')
-            # print("Popup header OK!")
+            
         except AssertionError:
             print("Check popup header!")
         self.enter_popup_name(name_generator())
