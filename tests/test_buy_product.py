@@ -20,7 +20,7 @@ def test_easy_purchase():
     mp.choosing_network_card()
 
     cards_page = Net_cards_page(driver)
-    cards_page.сhosing_network_card()
+    cards_page.сhоosing_network_card()
 
     cart = Cart_page(driver)
     cart.go_to_checkout()

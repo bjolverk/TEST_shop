@@ -63,9 +63,6 @@ class Net_cards_page(Base):
         self.get_select_net_card_1().click()
         print("Click select net card 1 ")
 
-    def clear_selected_card_price(self):
-        return self.get_selected_card_label().split()[0]
-
     def click_to_shopping_cart_button(self):
         self.get_to_shopping_cart_button().click()
         print("Click to shopping cart button ")
@@ -77,16 +74,28 @@ class Net_cards_page(Base):
 
     # METHODS
 
-    def сhosing_network_card(self):
+    def сhоosing_network_card(self):
         self.get_current_url()
         self.assert_word(self.get_page_title(), 'Сетевые карты')
-        self.click_select_net_card_1()
-        assert self.get_selected_card_label().text == r'Сетевая карта DEXP ZH-FEPCI1 [1 x RJ-45, 100 Мбит/сек, PCI]'
-        print('Label is correct')
         try:
-            self.click_to_shopping_cart_button()
 
-        except ElementClickInterceptedException:
-            print("Did not work out, no panic!")
-            self.hover_shopping_cart()
-            self.click_to_shopping_cart_button()
+            self.assert_word(self.get_selected_card_label(),
+                             r'Сетевая карта DEXP ZH-FEPCI1 [1 x RJ-45, 100 Мбит/сек, PCI]', 'Label')
+
+            try:
+                self.assert_word(self.get_selected_card_price(), '199 ₽', 'Product price')
+
+                self.click_select_net_card_1()
+                try:
+                    self.click_to_shopping_cart_button()
+
+                except ElementClickInterceptedException:
+                    print("Did not work out, no panic!")
+                    self.hover_shopping_cart()
+                    self.click_to_shopping_cart_button()
+            except AssertionError:
+                print('Attention! Check the price of the item.')
+
+        except AssertionError:
+            print('Attention! You need to check the title of the item.')
+

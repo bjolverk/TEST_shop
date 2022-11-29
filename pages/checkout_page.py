@@ -238,8 +238,8 @@ class Checkout_page(Base):
         self.input_email_field(email_generator())
         self.click_delivery_button()
         try:
-            self.assert_word(self.get_popup_heading(), 'Укажите детали доставки')
-            print("Popup header OK")
+            self.assert_word(self.get_popup_heading(), 'Укажите детали доставки', 'Popup header')
+            # print("Popup header OK!")
         except AssertionError:
             print("Check popup header!")
         self.enter_popup_name(name_generator())
@@ -250,6 +250,7 @@ class Checkout_page(Base):
         self.click_popup_elevator_aval()
         self.click_popup_comment_label()
         self.enter_popup_comment()
+        time.sleep(1)
         self.click_popup_confirm_key()
         self.click_card()
         time.sleep(2)
