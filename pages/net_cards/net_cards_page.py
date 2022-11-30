@@ -1,3 +1,4 @@
+import allure
 from selenium import webdriver
 from selenium.common import ElementClickInterceptedException
 from selenium.webdriver.common.by import By
@@ -74,28 +75,29 @@ class Net_cards_page(Base):
 
     # METHODS
 
-    def сhоosing_network_card(self):
-        self.get_current_url()
-        self.assert_word(self.get_page_title(), 'Сетевые карты')
-        try:
-
-            self.assert_word(self.get_selected_card_label(),
-                             r'Сетевая карта DEXP ZH-FEPCI1 [1 x RJ-45, 100 Мбит/сек, PCI]', 'Label')
-
+    def simple_choosing_network_card(self):
+        with allure.step('Simple choosing network card'):
+            self.get_current_url()
+            self.assert_word(self.get_page_title(), 'Сетевые карты')
             try:
-                self.assert_word(self.get_selected_card_price(), '199 ₽', 'Product price')
 
-                self.click_select_net_card_1()
+                self.assert_word(self.get_selected_card_label(),
+                                 r'Сетевая карта DEXP ZH-FEPCI1 [1 x RJ-45, 100 Мбит/сек, PCI]', 'Label')
+
                 try:
-                    self.click_to_shopping_cart_button()
+                    self.assert_word(self.get_selected_card_price(), '199 ₽', 'Product price')
 
-                except ElementClickInterceptedException:
-                    print("Did not work out, no panic!")
-                    self.hover_shopping_cart()
-                    self.click_to_shopping_cart_button()
+                    self.click_select_net_card_1()
+                    try:
+                        self.click_to_shopping_cart_button()
+
+                    except ElementClickInterceptedException:
+                        print("Did not work out, no panic!")
+                        self.hover_shopping_cart()
+                        self.click_to_shopping_cart_button()
+                except AssertionError:
+                    print('Attention! Check the price of the item.')
+
             except AssertionError:
-                print('Attention! Check the price of the item.')
-
-        except AssertionError:
-            print('Attention! You need to check the title of the item.')
+                print('Attention! You need to check the title of the item.')
 

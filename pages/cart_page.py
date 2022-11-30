@@ -1,5 +1,6 @@
 import time
 
+import allure
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
@@ -50,16 +51,17 @@ class Cart_page(Base):
     # METHODS
 
     def go_to_checkout(self):
-        self.get_current_url()
-        self.assert_word(self.get_page_title(), 'Корзина')
-        self.assert_url('https://www.dns-shop.ru/cart/')
-        try:
-            self.assert_word(self.get_product_label(), 'Сетевая карта DEXP ZH-FEPCI1', 'Product label')
+        with allure.step('Go to checkout'):
+            self.get_current_url()
+            self.assert_word(self.get_page_title(), 'Корзина')
+            self.assert_url('https://www.dns-shop.ru/cart/')
             try:
-                self.assert_word(self.get_order_price(), '199 ₽', 'Order price')
-                self.click_get_checkout_button()
-                time.sleep(4)
+                self.assert_word(self.get_product_label(), 'Сетевая карта DEXP ZH-FEPCI1', 'Product label')
+                try:
+                    self.assert_word(self.get_order_price(), '199 ₽', 'Order price')
+                    self.click_get_checkout_button()
+                    time.sleep(4)
+                except AssertionError:
+                    print('Attention! Check the price of the order.')
             except AssertionError:
-                print('Attention! Check the price of the order.')
-        except AssertionError:
-            print('Attention! You need to check the title of the item.')
+                print('Attention! You need to check the title of the item.')

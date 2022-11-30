@@ -1,3 +1,4 @@
+import allure
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
@@ -48,10 +49,11 @@ class Main_page(Base):
 
     # METHODS
 
-    def choosing_network_card(self):
-        self.driver.get(self.url)
-        self.driver.maximize_window()
-        self.get_current_url()
-        self.hover_net_hardware()
-        self.assert_word(self.get_cat_net_name(), 'Wi-Fi роутеры и оборудование для малых сетей', 'Заголовок')
-        self.click_net_cards()
+    def simple_choosing_product_category(self):
+        with allure.step('Simple choosing product category'):
+            self.driver.get(self.url)
+            self.driver.maximize_window()
+            self.get_current_url()
+            self.hover_net_hardware()
+            self.assert_word(self.get_cat_net_name(), 'Wi-Fi роутеры и оборудование для малых сетей', 'Заголовок')
+            self.click_net_cards()

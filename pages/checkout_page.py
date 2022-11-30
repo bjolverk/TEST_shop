@@ -1,5 +1,6 @@
 import time
 
+import allure
 from selenium import webdriver
 from selenium.common import TimeoutException
 from selenium.webdriver.common.by import By
@@ -223,40 +224,41 @@ class Checkout_page(Base):
 
     # METHODS
 
-    def confirm_order(self):
-        self.get_current_url()
-        self.assert_url('https://www.dns-shop.ru/checkout/')
-        try:
-            self.assert_word(self.get_page_title(), 'Безопасная оплата')
-            print("Page header OK")
-        except AssertionError:
-            print("Check page header")
+    def confirm_simple_order(self):
+        with allure.step('Confirm simple order'):
+            self.get_current_url()
+            self.assert_url('https://www.dns-shop.ru/checkout/')
+            try:
+                self.assert_word(self.get_page_title(), 'Безопасная оплата')
+                print("Page header OK")
+            except AssertionError:
+                print("Check page header")
 
-        self.input_phone_field(phone_generator())
-        # time.sleep(5)
+            self.input_phone_field(phone_generator())
+            # time.sleep(5)
 
-        self.input_email_field(email_generator())
-        self.click_delivery_button()
-        try:
-            self.assert_word(self.get_popup_heading(), 'Укажите детали доставки', 'Popup header')
+            self.input_email_field(email_generator())
+            self.click_delivery_button()
+            try:
+                self.assert_word(self.get_popup_heading(), 'Укажите детали доставки', 'Popup header')
 
-        except AssertionError:
-            print("Check popup header!")
-        self.enter_popup_name(name_generator())
-        self.enter_popup_address(address_generator())
-        self.click_popup_rise_floor()
-        self.click_popup_floors_list()
-        self.click_popup_floor_num()
-        self.click_popup_elevator_aval()
-        self.click_popup_comment_label()
-        self.enter_popup_comment()
-        time.sleep(1)
-        self.click_popup_confirm_key()
-        self.click_card()
-        time.sleep(2)
-        self.click_cash()
-        time.sleep(2)
-        self.click_become_a_member()
-        self.click_confirm_the_order()
-        self.get_screenshot()
-        time.sleep(5)
+            except AssertionError:
+                print("Check popup header!")
+            self.enter_popup_name(name_generator())
+            self.enter_popup_address(address_generator())
+            self.click_popup_rise_floor()
+            self.click_popup_floors_list()
+            self.click_popup_floor_num()
+            self.click_popup_elevator_aval()
+            self.click_popup_comment_label()
+            self.enter_popup_comment()
+            time.sleep(1)
+            self.click_popup_confirm_key()
+            self.click_card()
+            time.sleep(2)
+            self.click_cash()
+            time.sleep(2)
+            self.click_become_a_member()
+            self.click_confirm_the_order()
+            self.get_screenshot()
+            time.sleep(5)

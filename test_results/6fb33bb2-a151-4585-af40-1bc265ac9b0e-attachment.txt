@@ -1,0 +1,38 @@
+Start Test easy purchase
+Current url is https://www.dns-shop.ru/
+Network equipment popup is open
+Заголовок is OK!
+Go to the section of network cards
+Current url is https://www.dns-shop.ru/catalog/17a8a9e816404e77/setevye-karty/
+Good walue word
+Label is OK!
+Product price is OK!
+Click select net card 1 
+Click to shopping cart button 
+Current url is https://www.dns-shop.ru/cart/
+Good walue word
+Good walue url
+Product label is OK!
+Order price is OK!
+Click checkout button 
+Current url is https://www.dns-shop.ru/checkout/
+Good walue url
+Good walue word
+Page header OK
+Phone entered
+Email entered
+Click delivery button
+Popup header is OK!
+Name entered
+Address entered
+Checkbox 'Rise to the floor' clicked
+Floors list clicked!
+Floor selected
+Elevator accessibility set
+Comment field title clicked
+Comment text entered
+Chosen payment by card to the courier
+Cash payment to courier selected
+Become a member clicked
+Confirm order button clicked
+Finish test easy purchase
