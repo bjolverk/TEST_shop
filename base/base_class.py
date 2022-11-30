@@ -24,7 +24,7 @@ class Base:
     """METHOD SCREENSHOT"""
 
     def get_screenshot(self):
-        now_date = datetime.datetime.utcnow().strftime("%Y.%m.%d.%H.%M.%S")
+        now_date = datetime.datetime.now().strftime("%Y.%m.%d.%H.%M.%S")
         name_screenshot = f'screenshot {now_date}.png'
         self.driver.save_screenshot(r'..\TEST_shop\screen\\' + name_screenshot)
 
